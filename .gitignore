@@ -742,3 +742,4 @@ Temporary Items
 # Files that might appear in the root of a volume
 
 # Directories potentially created on remote AFP share
+/z-resources-backup/
