@@ -2,12 +2,12 @@
     <section class="container mx-auto flex flex-row justify-between">
         <!-- Logo -->
         <div class="shrink-0 flex items-center gap-2">
-            <a href="{{ route('welcome') }}"
+            <a href="{{ route('home') }}"
                class="hover:saturate-200 transition-all duration-500 ease-in-out">
                 <x-application-logo class="block h-12 w-auto fill-current"/>
             </a>
             <h1 class="text-3xl font-semibold">
-                <a href="{{ route('welcome') }}">Workopia</a>
+                <a href="{{ route('home') }}">Workopia</a>
             </h1>
         </div>
 
