@@ -20,8 +20,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth'])->group(function(){
+//Route::middleware(['auth'])->group(function() {
+
     Route::resource('users', UserController::class);
-});
+//});
 
 require __DIR__.'/auth.php';
