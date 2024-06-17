@@ -58,8 +58,8 @@
                     Actions</p>
                 <form
                     class="col-span-12 md:col-span-10 xl:col-span-11 flex flex-row gap-2 items-center "
-                    action="{{ route('users.delete', $user) }}"
-                    method="GET">
+                    action="{{ route('users.destroy', $user) }}"
+                    method="POST">
                     @csrf
                     @method('DELETE')
 
@@ -84,7 +84,14 @@
                                            text-red-600 hover:text-red-200 dark:hover:text-black bg-red-200 dark:bg-black hover:bg-red-500
                                            duration-300 ease-in-out transition-all">
                         <i class="fa fa-trash text-lg"></i>
-                        <span>Delete</span>
+                        <span>Confirm</span>
+                    </button>
+                    <button type="submit"
+                            class="p-1 px-2 text-center rounded-md
+                                           text-red-600 hover:text-red-200 dark:hover:text-black bg-red-200 dark:bg-black hover:bg-red-500
+                                           duration-300 ease-in-out transition-all">
+                        <i class="fa fa-trash text-lg"></i>
+                        <span>Cancel</span>
                     </button>
 
                 </form>

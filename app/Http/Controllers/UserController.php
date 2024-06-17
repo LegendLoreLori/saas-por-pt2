@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -59,11 +62,20 @@ class UserController extends Controller
     }
 
     /**
+     * Show form to confirm deletion of user resource from storage.
+     */
+    public function delete(User $user): View
+    {
+        return view('users.delete', compact(['user']));
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user): View
+    public function destroy(User $user): RedirectResponse
     {
-        //
+        $user->delete();
+        return redirect(route('users.index'));
     }
 
     /**

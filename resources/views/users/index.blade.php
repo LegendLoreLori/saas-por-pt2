@@ -63,10 +63,10 @@
                         <td class="py-2 pr-2 text-right">
                             <form
                                 class="flex flex-row gap-2 items-center justify-end"
-                                action="{{ route('users.destroy', $user) }}"
-                                method="POST">
+                                action="{{ route('users.delete', $user) }}"
+                                method="GET">
                                 @csrf
-                                @method('delete')
+                                @method("DELETE")
 
                                 <a href="{{ route('users.show', $user) }}"
                                    class="p-1 w-10 text-center rounded-md
