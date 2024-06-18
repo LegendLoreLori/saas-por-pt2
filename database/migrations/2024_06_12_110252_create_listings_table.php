@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('user_id');
+            $table->string('title', 255);
+            $table->longText('description')->nullable();
+            $table->string('salary', 45)->nullable();
+            $table->string('tags', 255)->nullable();
+            $table->string('company', 45)->nullable();
+            $table->string('address', 255)->nullable();
+            $table->string('city', 45)->nullable();
+            $table->string('phone', 45)->nullable();
+            $table->string('email', 45)->nullable();
+            $table->longText('requirements')->nullable();
+            $table->longText('benefits')->nullable();
             $table->timestamps();
         });
     }
