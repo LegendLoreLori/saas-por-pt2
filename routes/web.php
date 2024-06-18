@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function() {
-    // Trashed (Soft Deleted) users
+    // Trashed users
     Route::get('users/trash', [UserController::class, 'trash'])
         ->name('users.trash');
     // Individual user restore/remove

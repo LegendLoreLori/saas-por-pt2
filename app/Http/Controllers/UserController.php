@@ -75,7 +75,8 @@ class UserController extends Controller
     public function destroy(User $user): RedirectResponse
     {
         $user->delete();
-        return redirect(route('users.index'));
+        return redirect(route('users.index'))
+            ->withSuccess("User: $user->name deleted.");
     }
 
     /**
@@ -85,5 +86,61 @@ class UserController extends Controller
     {
         $users = User::onlyTrashed()->orderBy('deleted_at')->paginate(5);
         return view('users.trash', compact(['users']));
+    }
+
+    /**
+     * Restores a specific user from trash
+     */
+    public function restore(string $id): RedirectResponse
+    {
+        $user = User::onlyTrashed()->find($id);
+        $user->restore();
+        return redirect()
+            ->back()
+            ->withSuccess("Restored $user->name.");
+
+    }
+
+    /**
+     * Remove a user from trash, permanently deleting it
+     */
+    public function remove(string $id): RedirectResponse
+    {
+        $user = User::onlyTrashed()->find($id);
+        $oldUser = $user;
+        $user->forceDelete();
+        return redirect()
+            ->back()
+            ->withSuccess("Permanently Removed {$oldUser->name}.");
+    }
+
+    /**
+     * Restore all users in the trash to system
+     */
+    public function recoverAll(): RedirectResponse
+    {
+        $users = User::onlyTrashed()->get();
+        $trashCount = $users->count();
+
+        foreach ($users as $user) {
+            $user->restore();
+        }
+        return redirect(route('users.trash'))
+            ->withSuccess("Successfully recovered $trashCount users.");
+    }
+
+    /**
+     * Empties the trash, permanently deleting all trashed users
+     */
+    public function empty(): RedirectResponse
+    {
+        $users = User::onlyTrashed()->get();
+        $trashCount = $users->count();
+
+        foreach ($users as $user) {
+            $user->forceDelete();
+        }
+        return redirect(route('users.trash'))
+            ->withSuccess("Successfully emptied trash of $trashCount users.");
     }
 }
