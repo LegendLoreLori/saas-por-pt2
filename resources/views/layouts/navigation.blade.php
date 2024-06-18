@@ -11,7 +11,7 @@
                     {{ __('Dashboard') }}
                 </x-nav-link>
 
-                <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')" class="group">
+                <x-nav-link :href="route('listings.index')" :active="request()->routeIs('listings.*')" class="group">
                     {{ __('Listings') }}
                 </x-nav-link>
                 <x-nav-link :href="route('pricing')" :active="request()->routeIs

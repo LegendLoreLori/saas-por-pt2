@@ -24,7 +24,7 @@ class ListingFactory extends Factory
             'description'=> fake()->paragraph(4),
             'salary'=> fake()->numberBetween(40000, 110000),
             'company'=> fake()->company(),
-            'address'=> fake()->address(),
+            'address'=> fake()->streetAddress(),
             'city'=> fake()->city(),
             'phone'=> fake()->phoneNumber(),
             'email'=> fake()->safeEmail(),

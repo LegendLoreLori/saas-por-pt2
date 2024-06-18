@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StaticPages;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ListingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [StaticPages::class, 'welcome'])->name('home');
@@ -42,4 +43,7 @@ Route::middleware(['auth'])->group(function() {
     Route::resource('users', UserController::class);
 });
 
+Route::middleware(['auth'])->group(function() {
+    Route::resource('listings', ListingController::class);
+});
 require __DIR__.'/auth.php';

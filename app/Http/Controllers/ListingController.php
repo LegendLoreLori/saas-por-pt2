@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Listing;
 use App\Http\Requests\StoreListingRequest;
 use App\Http\Requests\UpdateListingRequest;
+use Illuminate\View\View;
 
 class ListingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        $listings = Listing::query()->orderByDesc('created_at')->paginate(6);
+        return view('listings.index', compact(['listings']));
     }
 
     /**

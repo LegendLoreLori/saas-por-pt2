@@ -6,7 +6,7 @@
                 Post your job listing now and find the perfect candidate.
             </p>
         </div>
-        <a href="post-job.html"
+        <a href="{{ route('listings.create') }}"
            class="ml-6 px-4 rounded-md py-2
                   text-black bg-yellow-400 shadow shadow-md shadow-black/70
                   hover:text-yellow-300 hover:bg-yellow-600 hover:shadow-none
@@ -24,28 +24,28 @@
 
         <section id="copyright">
             <p>
-                &copy; Copyright 2024, All rights reserved YOUR NAME, Traversy Media &amp; Adrian Gould
+                &copy; Copyright 2024, All rights reserved Lori, Traversy Media &amp; Adrian Gould
             </p>
         </section>
 
         <section id="footerNav" class="flex flex-col sm:flex-row gap-1 -ml-1">
-            <x-nav-link :href="route('home')"
+            <x-nav-link :href="route('dashboard')"
                         class="border-none text-gray-500 hover:text-gray-300 -my-1">
                 {{ __('Welcome') }}
             </x-nav-link>
-            <x-nav-link :href="route('home')"
+            <x-nav-link :href="route('welcome')"
                         class="border-none text-gray-500 hover:text-gray-300 -my-1">
                 {{ __('Dashboard') }}
             </x-nav-link>
-            <x-nav-link :href="route('home')"
+            <x-nav-link :href="route('contact-us')"
                         class="border-none text-gray-500 hover:text-gray-300 -my-1">
                 {{ __('Contact Us') }}
             </x-nav-link>
-            <x-nav-link :href="route('home')"
+            <x-nav-link :href="route('about')"
                         class="border-none text-gray-500 hover:text-gray-300 -my-1">
                 {{ __('About') }}
             </x-nav-link>
-            <x-nav-link :href="route('home')"
+            <x-nav-link :href="route('pricing')"
                         class="border-none text-gray-500 hover:text-gray-300 -my-1">
                 {{ __('Pricing') }}
             </x-nav-link>
