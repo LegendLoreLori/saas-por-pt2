@@ -22,8 +22,24 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function() {
-    Route::resource('users', UserController::class);
+    // Trashed (Soft Deleted) users
+    Route::get('users/trash', [UserController::class, 'trash'])
+        ->name('users.trash');
+    // Individual user restore/remove
+    Route::get('users/{user}/trash/restore', [UserController::class, 'restore'])
+        ->name('users.trash-restore');
+    Route::delete('users/{user}/trash/remove', [UserController::class, 'remove'])
+        ->name('users.trash-remove');
+    // All trashed users restore/remove
+    Route::post('users/trash/recover', [UserController::class, 'recoverAll'])
+        ->name('users.trash-recover');
+    Route::delete('users/trash/empty', [UserController::class, 'empty'])
+        ->name('users.trash-empty');
+
+    // Delete user
     Route::get('users/{user}/delete', [UserController::class, 'delete'])->name('users.delete');
+
+    Route::resource('users', UserController::class);
 });
 
 require __DIR__.'/auth.php';

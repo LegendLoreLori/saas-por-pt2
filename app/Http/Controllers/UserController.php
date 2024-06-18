@@ -81,5 +81,9 @@ class UserController extends Controller
     /**
      * Displays all soft destroyed resources.
      */
-
+    public function trash(): View
+    {
+        $users = User::onlyTrashed()->orderBy('deleted_at')->paginate(5);
+        return view('users.trash', compact(['users']));
+    }
 }
