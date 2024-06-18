@@ -164,7 +164,7 @@ class UserController extends Controller
         $user->forceDelete();
         return redirect()
             ->back()
-            ->withSuccess("Permanently Removed {$oldUser->name}.");
+            ->withSuccess("Permanently removed {$oldUser->name}.");
     }
 
     /**

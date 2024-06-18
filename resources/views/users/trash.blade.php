@@ -24,7 +24,7 @@
                 </p>
                 <section class="flex flex-row justify-between gap-4">
                     <a href="{{ route('users.index') }}"
-                       class="p-2 px-4 text-center rounded-md h-10 flex gap-4
+                       class="p-2 px-4 text-center rounded-md flex gap-4
                               text-gray-600 hover:text-gray-200 bg-gray-200 hover:bg-gray-500
                               duration-300 ease-in-out transition-all items-center">
                         <i class="fa fa-users text-lg"></i>
@@ -36,7 +36,8 @@
                         @CSRF
                         <button type="submit"
                                 class="p-2 px-4  text-center rounded-md
-                                   text-blue-600 hover:text-blue-200 dark:hover:text-blue-900
+                                   text-blue-200 hover:text-blue-600
+                                   dark:hover:text-blue-900
                                    bg-blue-200 dark:bg-blue-900 hover:bg-blue-500
                                    duration-300 ease-in-out transition-all">
                             <i class="fa fa-trash-arrow-up text-lg"></i>
@@ -50,7 +51,8 @@
                         @method('delete')
                         <button type="submit"
                                 class="p-2 px-4  text-center rounded-md
-                                   text-red-600 hover:text-red-200 dark:hover:text-red-900
+                                   text-red-200 hover:text-red-600
+                                   dark:hover:text-red-900
                                    bg-red-200 dark:bg-red-900 hover:bg-red-500
                                    duration-300 ease-in-out transition-all">
                             <i class="fa fa-trash text-lg"></i>
@@ -104,7 +106,7 @@
                                                text-red-600 hover:text-red-200 dark:hover:text-black bg-red-200 dark:bg-black hover:bg-red-500
                                                duration-300 ease-in-out transition-all">
                                     <i class="fa fa-user-slash"></i>
-                                    <span>Remove!</span>
+                                    <span>Remove</span>
                                 </button>
                             </form>
                         </td>

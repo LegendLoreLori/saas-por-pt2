@@ -32,7 +32,12 @@
                         {{ __('New User') }}
                     </a>
 
-
+                    <a href="{{ route('users.trash') }}"
+                       class="p-2 px-4 text-center rounded-md h-10
+                              text-slate-600 hover:text-slate-200 bg-slate-200 hover:bg-slate-500
+                              duration-300 ease-in-out transition-all space-x-2">
+                        <i class="fa fa-trash font-xl"></i>
+                    </a>
                 </section>
             </header>
 
