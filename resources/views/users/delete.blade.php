@@ -54,49 +54,33 @@
             </div>
 
             <div class="grid grid-cols-12">
-                <p class="col-span-12 md:col-span-2 xl:col-span-1 text-gray-500">
-                    Actions</p>
+                <p class="col-span-12 md:col-span-8 xl:col-span-10
+                text-gray-500">
+                    Are you sure you want to delete user: {{ $user->name }}?</p>
                 <form
-                    class="col-span-12 md:col-span-10 xl:col-span-11 flex flex-row gap-2 items-center "
+                    class="col-span-12 md:col-span-4 xl:col-span-2 flex
+                    flex-row gap-2 items-center "
                     action="{{ route('users.destroy', $user) }}"
                     method="POST">
                     @csrf
                     @method('DELETE')
-
-                    <a href="{{ route('users.index') }}"
+                    <button type="submit"
+                            class="p-1 px-2 text-center rounded-md
+                                           text-red-600 hover:text-red-200 dark:hover:text-black bg-red-200 dark:bg-black hover:bg-red-500
+                                           duration-300 ease-in-out
+                                           transition-all">
+                        <i class="fa fa-trash text-lg"></i>
+                        <span>Confirm</span>
+                    </button>
+                    <a href="{{ route('users.show', $user) }}"
                        class="p-1 px-6 text-center rounded-md
                                       text-blue-600 hover:text-blue-200 dark:hover:text-black bg-blue-200 dark:bg-black hover:bg-blue-500
                                       duration-300 ease-in-out transition-all">
                         <i class="fa fa-arrow-left text-lg"></i>
                         <span>Back</span>
                     </a>
-
-                    <a href="{{ route('users.edit', $user) }}"
-                       class="p-1 px-6 text-center rounded-md
-                                      text-purple-600 hover:text-purple-200 dark:hover:text-black bg-purple-200 dark:bg-black hover:bg-purple-500
-                                      duration-300 ease-in-out transition-all">
-                        <i class="fa fa-save text-lg"></i>
-                        <span>Edit</span>
-                    </a>
-
-                    <button type="submit"
-                            class="p-1 px-2 text-center rounded-md
-                                           text-red-600 hover:text-red-200 dark:hover:text-black bg-red-200 dark:bg-black hover:bg-red-500
-                                           duration-300 ease-in-out transition-all">
-                        <i class="fa fa-trash text-lg"></i>
-                        <span>Confirm</span>
-                    </button>
-                    <button type="submit"
-                            class="p-1 px-2 text-center rounded-md
-                                           text-red-600 hover:text-red-200 dark:hover:text-black bg-red-200 dark:bg-black hover:bg-red-500
-                                           duration-300 ease-in-out transition-all">
-                        <i class="fa fa-trash text-lg"></i>
-                        <span>Cancel</span>
-                    </button>
-
                 </form>
             </div>
-
         </section>
     </article>
 </x-app-layout>
