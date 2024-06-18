@@ -6,14 +6,16 @@
         {{--TODO: update navigation links--}}
             <!-- Navigation Links -->
             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex items-center ">
-                <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')" class="group">
+                <x-nav-link :href="route('home')" :active="request()->routeIs
+                ('home')" class="group">
                     {{ __('Dashboard') }}
                 </x-nav-link>
 
                 <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')" class="group">
                     {{ __('Listings') }}
                 </x-nav-link>
-                <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')" class="group">
+                <x-nav-link :href="route('pricing')" :active="request()->routeIs
+                ('pricing')" class="group">
                     {{ __('Pricing') }}
                 </x-nav-link>
 
@@ -21,10 +23,12 @@
                 ->routeIs('users.*')" class="group">
                     {{ __('Users') }}
                 </x-nav-link>
-                <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')" class="group">
+                <x-nav-link :href="route('about')" :active="request()
+                ->routeIs('about')" class="group">
                     {{ __('About') }}
                 </x-nav-link>
-                <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')" class="group">
+                <x-nav-link :href="route('contact-us')" :active="request()
+                ->routeIs('contact-us')" class="group">
                     {{ __('Contact Us') }}
                 </x-nav-link>
             </div>
