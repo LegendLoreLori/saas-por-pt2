@@ -11,7 +11,8 @@ class StoreUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // TODO: return to false/remove at authorisation stage
+        return true;
     }
 
     /**
