@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -20,7 +21,8 @@ class StaticPages extends Controller
      */
     public function welcome(): View
     {
-        return view('pages.welcome');
+        $listings = Listing::query()->orderByDesc('created_at')->limit(3)->get();
+        return view('pages.welcome', compact(['listings']));
     }
 
     /*
