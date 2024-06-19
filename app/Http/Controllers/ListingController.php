@@ -21,9 +21,9 @@ class ListingController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return (view('listings.create'));
     }
 
     /**
@@ -31,7 +31,40 @@ class ListingController extends Controller
      */
     public function store(StoreListingRequest $request)
     {
-        //
+        // Validate
+        $rules = [
+            'user_id' => 'required|integer|exists:users,id',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'salary' => 'nullable|string|max:45',
+            'company' => 'nullable|string|max:45',
+            'address' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:45',
+            'phone' => 'nullable|string|max:45',
+            'email' => 'nullable|email|max:45',
+            'requirements' => 'nullable|string',
+            'benefits' => 'nullable|string',
+        ];
+        $validated = $request->validate($rules);
+
+        // Store
+        $listing = Listing::create([
+                'user_id' => $validated['user_id'],
+                'title' => $validated['title'],
+                'description' => $validated['description'],
+                'salary' => $validated['salary'],
+                'company' => $validated['company'],
+                'address' => $validated['address'],
+                'city' => $validated['city'],
+                'phone' => $validated['phone'],
+                'email' => $validated['email'],
+                'requirements' => $validated['requirements'],
+                'benefits' => $validated['benefits'],
+            ]
+        );
+
+        return redirect(route('listings.index'))
+            ->withSuccess("Successfully created $listing->title.");
     }
 
     /**

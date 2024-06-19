@@ -11,7 +11,8 @@ class StoreListingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // TODO: return to false/remove at authorisation step
+        return true;
     }
 
     /**
