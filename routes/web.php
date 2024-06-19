@@ -16,12 +16,14 @@ Route::get('/dashboard', function () {
     return view('pages.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Profile
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Users
 Route::middleware(['auth'])->group(function() {
     // Trashed users
     Route::get('users/trash', [UserController::class, 'trash'])
@@ -43,6 +45,7 @@ Route::middleware(['auth'])->group(function() {
     Route::resource('users', UserController::class);
 });
 
+// Listings
 Route::middleware(['auth'])->group(function() {
     // Trashed listings
     Route::get('listings/trash', [ListingController::class, 'trash'])
@@ -64,4 +67,10 @@ Route::middleware(['auth'])->group(function() {
 
     Route::resource('listings', ListingController::class);
 });
+
+// Email
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
 require __DIR__.'/auth.php';

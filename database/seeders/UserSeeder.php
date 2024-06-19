@@ -34,6 +34,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Ivanna Vinn',
                 'email' => 'ivanna.vinn@example.com',
+                'email_verified_at' => null,
             ],
             [
                 'name' => 'Russ Round',
