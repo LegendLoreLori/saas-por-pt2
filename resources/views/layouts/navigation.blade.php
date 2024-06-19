@@ -132,7 +132,7 @@
 
         </div>
 
-        <x-responsive-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')"
+        <x-responsive-nav-link :href="route('listings.create')" :active="request()->routeIs('welcome')"
                                class="bg-yellow-500 focus:border-yellow-500 rounded-md
                                       my-1">
             <i class="fa fa-edit mr-2"></i> {{ __('Post a Job') }}

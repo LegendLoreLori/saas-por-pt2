@@ -21,7 +21,7 @@
 
         <!-- New Job Post -->
         <div class="flex">
-            <a href="{{ route('home') }}" :active="{{ request()->routeIs('/') }}"
+            <a href="{{ route('listings.create') }}" :active="{{ request()->routeIs('/') }}"
                class="ml-6 px-4 rounded-md py-2
                       text-black bg-yellow-400 shadow shadow-black/70
                       hover:text-yellow-300 hover:bg-yellow-600 hover:shadow-none
