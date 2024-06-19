@@ -16,6 +16,19 @@
             </section>
         @endif
         <section>
+            <header class="flex flex-row justify-between items-center gap-2">
+                <p class="font-semibold text-lg text-gray-800 dark:text-gray-200 leading-tight">
+                    {{ __('Management') }}
+                </p>
+                <section class="flex flex-row justify-between gap-4">
+                    <a href="{{ route('listings.trash') }}"
+                       class="p-2 px-4 text-center rounded-md h-10
+                              text-slate-600 hover:text-slate-200 bg-slate-200 hover:bg-slate-500
+                              duration-300 ease-in-out transition-all space-x-2">
+                        <i class="fa fa-trash font-xl"></i>
+                    </a>
+                </section>
+            </header>
             <div class="container mx-auto p-4 mt-4">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                     @foreach($listings as $listing)

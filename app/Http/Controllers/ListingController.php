@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Listing;
 use App\Http\Requests\StoreListingRequest;
 use App\Http\Requests\UpdateListingRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class ListingController extends Controller
@@ -121,8 +122,74 @@ class ListingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Listing $listing)
+    public function destroy(Listing $listing): RedirectResponse
     {
-        //
+        $listing->delete();
+        return redirect(route('listings.index'))
+            ->withSuccess("Listing: $listing->title deleted.");
+    }
+
+    /**
+     * Display all soft deleted resources
+     */
+    public function trash(): View
+    {
+        $listings = Listing::onlyTrashed()->orderBy('deleted_at')->paginate(5);
+        return view('listings.trash', compact(['listings']));
+    }
+
+    /**
+     * Restores a specific listing from trash
+     */
+    public function restore(string $id): RedirectResponse
+    {
+        $listing = Listing::onlyTrashed()->find($id);
+        $listing->restore();
+        return redirect()
+            ->back()
+            ->withSuccess("Restored $listing->title");
+    }
+
+    /**
+     * Remove a listing from trash, permanently deleting it
+     */
+    public function remove(string $id): RedirectResponse
+    {
+        $listing = Listing::onlyTrashed()->find($id);
+        $oldListing = $listing;
+        $listing->forceDelete();
+        return redirect()
+            ->back()
+            ->withSuccess("Permanently removed $oldListing->title");
+    }
+
+    /**
+     * Restore all listings in the trash to system
+     */
+    public function recoverAll(): RedirectResponse
+    {
+        $listings = Listing::onlyTrashed()->get();
+        $trashCount = $listings->count();
+
+        foreach ($listings as $listing) {
+            $listing->restore();
+        }
+        return redirect(route('listings.trash'))
+            ->withSuccess("Successfully recovered $trashCount listings.");
+    }
+
+    /**
+     * Empties the trash, permanently deleting all trashed users
+     */
+    public function empty(): RedirectResponse
+    {
+        $listings = Listing::onlyTrashed()->get();
+        $trashCount = $listings->count();
+
+        foreach ($listings as $listing) {
+            $listing->forceDelete();
+        }
+        return redirect(route('listings.trash'))
+            ->withSuccess("Permanently deleted $trashCount listings.");
     }
 }

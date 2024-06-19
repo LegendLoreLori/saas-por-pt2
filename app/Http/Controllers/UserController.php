@@ -164,7 +164,7 @@ class UserController extends Controller
         $user->forceDelete();
         return redirect()
             ->back()
-            ->withSuccess("Permanently removed {$oldUser->name}.");
+            ->withSuccess("Permanently removed $oldUser->name.");
     }
 
     /**
@@ -194,6 +194,6 @@ class UserController extends Controller
             $user->forceDelete();
         }
         return redirect(route('users.trash'))
-            ->withSuccess("Successfully emptied trash of $trashCount users.");
+            ->withSuccess("Permanently deleted $trashCount users.");
     }
 }

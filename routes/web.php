@@ -44,8 +44,19 @@ Route::middleware(['auth'])->group(function() {
 });
 
 Route::middleware(['auth'])->group(function() {
-    // Trashed listing
-
+    // Trashed listings
+    Route::get('listings/trash', [ListingController::class, 'trash'])
+        ->name('listings.trash');
+    // Individual listing restore/remove
+    Route::get('listings/{listing}/trash/restore', [ListingController::class, 'restore'])
+        ->name('listings.trash-restore');
+    Route::delete('listings/{listing}/trash/remove', [ListingController::class, 'remove'])
+        ->name('listings.trash-remove');
+    // All trashed listing restore/remove
+    Route::post('listings/trash/recover', [ListingController::class, 'recoverAll'])
+        ->name('listings.trash-recover');
+    Route::delete('listings/trash/empty', [ListingController::class, 'empty'])
+        ->name('listings.trash-empty');
 
     // Delete listing
     Route::get('listings/{listing}/delete', [ListingController::class, 'delete'])->name('listings.delete');
