@@ -24,37 +24,33 @@
 
         <section class="container mx-auto p-4 mt-4">
             <div class="rounded-lg shadow-md bg-white p-3">
-                <div class="flex flex-col md:flex-row p-2 justify-between items-center md:items-stretch">
-                    <a class="block p-2 text-blue-700" href="{{route('listings.index')}}">
-                        <i class="fa fa-arrow-alt-circle-left"></i>
-                        Back To Listings
-                    </a>
+                <div class="flex flex-col md:flex-row p-2 justify-between items-center md:items-stretch bg-red-200 rounded">
+                        <p class="block p-2 text-red-600">Are you sure you want to delete this listing?</p>
                     <div class="flex space-x-4">
                         {{--                        TODO: add authorisation--}}
                         {{--                        <?php if (Framework\Authorisation::isOwner($listing->user_id)): ?>--}}
-                        <!-- Edit and Delete Form -->
-                        <form
-                            class="flex flex-col md:flex-row gap-2 pr-2"
-                            action="{{ route('listings.delete', $listing) }}"
-                            method="GET">
+                        <!-- Delete Form -->
+                        <form method="POST"
+                              action="{{ route('listings.destroy', $listing) }}"
+                              method="POST"
+                                class="flex flex-col md:flex-row gap-2 pr-2">
                             @csrf
                             @method('DELETE')
-                            <a href="{{ route('listings.edit', $listing) }}"
-                               class="sm:py-2 px-6 text-center rounded-md
-                                      text-purple-600 hover:text-purple-200 dark:hover:text-black bg-purple-200 dark:bg-black hover:bg-purple-500
-                                      duration-300 ease-in-out transition-all">
-                                <i class="fa fa-save text-lg"></i>
-                                <span>Edit</span>
-                            </a>
-
                             <button type="submit"
-                                    class="p-1 px-2 text-center rounded-md
+                                    class="sm:py-2 px-2 text-center rounded-md
                                            text-red-600 hover:text-red-200 dark:hover:text-black bg-red-200 dark:bg-black hover:bg-red-500
-                                           duration-300 ease-in-out transition-all">
+                                           duration-300 ease-in-out
+                                           transition-all">
                                 <i class="fa fa-trash text-lg"></i>
-                                <span>Delete</span>
+                                <span>Confirm</span>
                             </button>
-
+                            <a href="{{ route('listings.show', $listing) }}"
+                               class="sm:py-2 px-6 flex items-center rounded-md
+                                      text-blue-600 hover:text-blue-200 dark:hover:text-black bg-blue-200 dark:bg-black hover:bg-blue-500
+                                      duration-300 ease-in-out transition-all">
+                                <i class="fa fa-arrow-left text-lg"></i>
+                                <span>Back</span>
+                            </a>
                         </form>
                         <!-- End Delete Form -->
                         {{--                        <?php endif; ?>--}}
@@ -70,7 +66,8 @@
                             <strong>Salary:</strong> {{ $listing->salary }}
                         </li>
                         <li class="mb-2">
-                            <strong>Location:</strong> {{  $listing->city }}, {{ $listing->address }}
+                            <strong>Location:</strong> {{  $listing->city }}
+                            , {{ $listing->state }}
                         </li>
                         @if(!empty($listing->tags))
                             <li class="mb-2">
@@ -95,17 +92,6 @@
                     Benefits</h3>
                 <p>{{ $listing->benefits }}</p>
             </div>
-            <p class="my-5 dark:text-white">
-                Put "Job Application" as the subject of your email and
-                attach your
-                resume.
-            </p>
-            <a
-                href="mailto:{{ $listing->email }}"
-                class="block w-full text-center px-5 py-2.5 shadow-sm rounded border text-base font-medium cursor-pointer text-indigo-700 bg-indigo-100 hover:bg-indigo-200"
-            >
-                Apply Now
-            </a>
         </section>
     </article>
 </x-app-layout>

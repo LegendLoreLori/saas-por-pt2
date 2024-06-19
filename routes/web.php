@@ -44,6 +44,13 @@ Route::middleware(['auth'])->group(function() {
 });
 
 Route::middleware(['auth'])->group(function() {
+    // Trashed listing
+
+
+    // Delete listing
+    Route::get('listings/{listing}/delete', [ListingController::class, 'delete'])->name('listings.delete');
+
+
     Route::resource('listings', ListingController::class);
 });
 require __DIR__.'/auth.php';

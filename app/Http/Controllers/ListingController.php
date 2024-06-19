@@ -111,6 +111,14 @@ class ListingController extends Controller
     }
 
     /**
+     * Show form to confirm deletion of listing resource from storage
+     */
+    public function delete(Listing $listing): View
+    {
+        return view('listings.delete', compact(['listing']));
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(Listing $listing)
