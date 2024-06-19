@@ -78,9 +78,9 @@ class ListingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Listing $listing)
+    public function edit(Listing $listing): View
     {
-        //
+        return view('listings.edit', compact(['listing']));
     }
 
     /**
@@ -88,7 +88,26 @@ class ListingController extends Controller
      */
     public function update(UpdateListingRequest $request, Listing $listing)
     {
-        //
+        // Validate
+        $rules = [
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'salary' => 'nullable|string|max:45',
+            'company' => 'nullable|string|max:45',
+            'address' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:45',
+            'phone' => 'nullable|string|max:45',
+            'email' => 'nullable|email|max:45',
+            'requirements' => 'nullable|string',
+            'benefits' => 'nullable|string',
+        ];
+        $validated = $request->validate($rules);
+
+        // Store
+        $listing->update($validated);
+
+        return redirect(route('listings.show', $listing))
+            ->withSuccess("Successfully updated $listing->title.");
     }
 
     /**
