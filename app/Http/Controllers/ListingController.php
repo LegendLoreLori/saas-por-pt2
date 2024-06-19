@@ -32,6 +32,7 @@ class ListingController extends Controller
      */
     public function store(StoreListingRequest $request)
     {
+        $request['user_id'] = auth()->user()->getAuthIdentifier();
         // Validate
         $rules = [
             'user_id' => 'required|integer|exists:users,id',

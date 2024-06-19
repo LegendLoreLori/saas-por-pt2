@@ -36,18 +36,6 @@
                         Job Info
                     </h2>
 
-{{--                    There would be a proper way to receive the current User's ID but this will do for now--}}
-                    <fieldset class="hidden">
-                        <input
-                            type="text"
-                            name="user_id"
-                            value="1">
-                    </fieldset>
-                    @error("user_id")
-                    <span class="text-gray-500 col-span-2"></span>
-                    <p class="small text-red-500 col-span-5 text-sm">{{ $message }}</p>
-                    @enderror
-
                     <fieldset class="mb-4">
                         <input
                             type="text"
