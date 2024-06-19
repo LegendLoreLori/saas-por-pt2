@@ -79,22 +79,20 @@
                         />
                     </fieldset>
                     <fieldset class="mb-4">
-                        <input
+                        <textarea
                             type="text"
                             name="requirements"
                             placeholder="Requirements"
-                            value="{{ old('requirements') ?? $listing->requirements }}"
                             class="w-full px-4 py-2 border rounded focus:outline-none"
-                        />
+                        >{{ old('requirements') ?? $listing->requirements }}</textarea>
                     </fieldset>
                     <fieldset class="mb-4">
-                        <input
+                        <textarea
                             type="text"
                             name="benefits"
                             placeholder="Benefits"
-                            value="{{ old('benefits') ?? $listing->benefits }}"
                             class="w-full px-4 py-2 border rounded focus:outline-none"
-                        />
+                        >{{ old('benefits') ?? $listing->benefits }}</textarea>
                     </fieldset>
                     <fieldset class="mb-4">
                         <input

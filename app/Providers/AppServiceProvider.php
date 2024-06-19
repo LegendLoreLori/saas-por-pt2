@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use App\Models\Listing;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +22,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // User gate
+        Gate::define('manage-listing', function (User $user, Listing $listing) {
+            return $user->id === $listing->user_id;
+        });
     }
 }

@@ -30,34 +30,33 @@
                         Back To Listings
                     </a>
                     <div class="flex space-x-4">
-                        {{--                        TODO: add authorisation--}}
-                        {{--                        <?php if (Framework\Authorisation::isOwner($listing->user_id)): ?>--}}
                         <!-- Edit and Delete Form -->
-                        <form
-                            class="flex flex-col md:flex-row gap-2 pr-2"
-                            action="{{ route('listings.delete', $listing) }}"
-                            method="GET">
-                            @csrf
-                            @method('DELETE')
-                            <a href="{{ route('listings.edit', $listing) }}"
-                               class="sm:py-2 px-6 text-center rounded-md
+                        @if(Gate::allows('manage-listing', $listing))
+                            <form
+                                class="flex flex-col md:flex-row gap-2 pr-2"
+                                action="{{ route('listings.delete', $listing) }}"
+                                method="GET">
+                                @csrf
+                                @method('DELETE')
+                                <a href="{{ route('listings.edit', $listing) }}"
+                                   class="sm:py-2 px-6 text-center rounded-md
                                       text-purple-600 hover:text-purple-200 dark:hover:text-black bg-purple-200 dark:bg-black hover:bg-purple-500
                                       duration-300 ease-in-out transition-all">
-                                <i class="fa fa-save text-lg"></i>
-                                <span>Edit</span>
-                            </a>
+                                    <i class="fa fa-save text-lg"></i>
+                                    <span>Edit</span>
+                                </a>
 
-                            <button type="submit"
-                                    class="p-1 px-2 text-center rounded-md
+                                <button type="submit"
+                                        class="p-1 px-2 text-center rounded-md
                                            text-red-600 hover:text-red-200 dark:hover:text-black bg-red-200 dark:bg-black hover:bg-red-500
                                            duration-300 ease-in-out transition-all">
-                                <i class="fa fa-trash text-lg"></i>
-                                <span>Delete</span>
-                            </button>
+                                    <i class="fa fa-trash text-lg"></i>
+                                    <span>Delete</span>
+                                </button>
 
-                        </form>
+                            </form>
+                        @endif
                         <!-- End Delete Form -->
-                        {{--                        <?php endif; ?>--}}
                     </div>
                 </div>
                 <div class="p-4">
