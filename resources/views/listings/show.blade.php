@@ -31,7 +31,7 @@
                     </a>
                     <div class="flex space-x-4">
                         <!-- Edit and Delete Form -->
-                        @if(Gate::allows('manage-listing', $listing))
+                        @if(true /* TODO: reimplement authorisation*/)
                             <form
                                 class="flex flex-col md:flex-row gap-2 pr-2"
                                 action="{{ route('listings.delete', $listing) }}"

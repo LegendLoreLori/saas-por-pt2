@@ -8,6 +8,11 @@ use Illuminate\Auth\Access\Response;
 
 class ListingPolicy
 {
+    public function before(User $user, string $ability): bool|null
+    {
+        //
+    }
+
     /**
      * Determine whether the user can view any models.
      */
@@ -35,7 +40,7 @@ class ListingPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Listing $listing): bool
+    public function update(User $user, Listing $listing): Response
     {
         //
     }

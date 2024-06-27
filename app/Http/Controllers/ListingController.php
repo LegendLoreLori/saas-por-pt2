@@ -83,9 +83,6 @@ class ListingController extends Controller
      */
     public function edit(Listing $listing): View
     {
-        if(! Gate::allows('manage-listing', $listing)){
-          abort(403);
-        }
         return view('listings.edit', compact(['listing']));
     }
 

@@ -22,9 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // User gate
-        Gate::define('manage-listing', function (User $user, Listing $listing) {
-            return $user->id === $listing->user_id;
-        });
+        //
     }
 }
