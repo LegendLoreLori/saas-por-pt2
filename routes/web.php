@@ -45,6 +45,10 @@ Route::middleware(['auth'])->group(function() {
     Route::resource('users', UserController::class);
 });
 
+/* I really don't understand how our middleware is working, it appears to be a
+middleware group, but I can't actually see any middleware controllers defined?
+Is it even middleware? or just some funny auth? */
+
 // Listings
 Route::middleware(['auth'])->group(function() {
     // Trashed listings

@@ -16,7 +16,7 @@ class ListingController extends Controller
      */
     public function index(): View
     {
-            $listings = Listing::query()->orderByDesc('created_at')->paginate(6);
+        $listings = Listing::query()->orderByDesc('created_at')->paginate(6);
         return view('listings.index', compact(['listings']));
     }
 
@@ -75,6 +75,10 @@ class ListingController extends Controller
      */
     public function show(Listing $listing): View
     {
+        // Calls the 'show' method in ListingPolicy
+        // TODO: redirect to login page
+        Gate::authorize('show', $listing);
+
         return view('listings.show', compact('listing'));
     }
 
