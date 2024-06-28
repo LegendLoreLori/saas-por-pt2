@@ -22,10 +22,8 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'user-browse']);
         Permission::create(['name' => 'user-show']);
         Permission::create(['name' => 'user-edit']);
-        Permission::create(['name' => 'user-edit-others']);
         Permission::create(['name' => 'user-add']);
         Permission::create(['name' => 'user-delete']);
-        Permission::create(['name' => 'user-delete-others']);
         Permission::create(['name' => 'user-trash-recover']);
         Permission::create(['name' => 'user-trash-remove']);
         Permission::create(['name' => 'user-trash-recover-all']);
@@ -43,14 +41,12 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'listing-trash-empty']);
 
         // Create role management permission
-        Permission::create(['name' => 'manage-roles-and-permissions']);
+        Permission::create(['name' => 'manage-staff']);
+        Permission::create(['name' => 'manage-clients']);
 
         // Create roles
         $client = Role::create(['name' => 'client']);
         $client->givePermissionTo([
-            'user-show',
-            'user-edit',
-            'user-delete',
             'listing-browse',
             'listing-show',
             'listing-edit',
@@ -62,9 +58,10 @@ class PermissionsSeeder extends Seeder
         $staff->syncPermissions($client->permissions()->get());
         $staff->givePermissionTo([
             'user-browse',
+            'user-show',
+            'user-edit',
             'user-add',
-            'user-edit-others',
-            'user-delete-others',
+            'user-delete',
         ]);
 
         $admin = Role::create(['name' => 'admin']);

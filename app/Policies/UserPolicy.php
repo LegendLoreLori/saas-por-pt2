@@ -10,9 +10,9 @@ class UserPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function index(User $user): bool
     {
-        //
+        return $user->can('user-browse');
     }
 
     /**

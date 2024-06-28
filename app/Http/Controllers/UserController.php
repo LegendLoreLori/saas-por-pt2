@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
@@ -20,6 +21,8 @@ class UserController extends Controller
      */
     public function index(): View
     {
+        Gate::authorize('index', User::class);
+
         $users = User::paginate(10);
         return view('users.index', compact(['users']));
     }

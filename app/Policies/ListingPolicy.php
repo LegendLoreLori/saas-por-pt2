@@ -16,7 +16,7 @@ class ListingPolicy
      */
     public function index(User $user): bool
     {
-        return($user->can('listing-browse'));
+        return $user->can('listing-browse');
     }
 
     /**

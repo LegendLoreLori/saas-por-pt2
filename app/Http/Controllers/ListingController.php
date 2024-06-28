@@ -75,8 +75,6 @@ class ListingController extends Controller
      */
     public function show(Listing $listing): View
     {
-        // Calls the 'show' method in ListingPolicy
-        // TODO: redirect to login page
         Gate::authorize('show', $listing);
 
         return view('listings.show', compact('listing'));
