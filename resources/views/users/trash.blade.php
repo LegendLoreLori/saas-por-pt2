@@ -1,14 +1,5 @@
 <x-app-layout>
     <article class="container mx-auto max-w-7xl">
-        <header
-            class="py-4 bg-gray-600 text-gray-200 px-4 rounded-t-lg mb-4 flex flex-row justify-between items-center">
-            <div>
-                <h2 class="text-3xl font-semibold">Management Area</h2>
-                <h3 class="text-2xl">Users Recycle Bin</h3>
-            </div>
-            <i class="fa fa-user-slash text-5xl"></i>
-        </header>
-
         @if(Session::has('success'))
             <section id="Messages" class="my-4 px-4">
                 <div class="p-4 border-green-500 bg-green-100 text-green-700 rounded-lg">

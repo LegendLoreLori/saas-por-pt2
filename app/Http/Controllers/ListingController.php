@@ -20,6 +20,14 @@ class ListingController extends Controller
         return view('listings.index', compact(['listings']));
     }
 
+    public function manage(): View
+    {
+        Gate::authorize('index', Listing::class);
+
+        $listings = Listing::paginate(10);
+        return view('listings.manage', compact(['listings']));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

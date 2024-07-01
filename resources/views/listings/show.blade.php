@@ -1,14 +1,5 @@
 <x-app-layout>
     <article class="container mx-auto max-w-7xl">
-        <header
-            class="py-4 bg-gray-600 text-gray-200 px-4 rounded-t-lg mb-4 flex flex-row justify-between items-center">
-            <div>
-                <h2 class="text-3xl font-semibold">Management Area</h2>
-                <h3 class="text-2xl">User Details</h3>
-            </div>
-            <i class="fa fa-user text-5xl"></i>
-        </header>
-
         @if(Session::has('success'))
             <section id="Messages" class="my-4 px-4">
                 <div
@@ -24,8 +15,10 @@
 
         <section class="container mx-auto p-4 mt-4">
             <div class="rounded-lg shadow-md bg-white p-3">
-                <div class="flex flex-col md:flex-row p-2 justify-between items-center md:items-stretch">
-                    <a class="block p-2 text-blue-700" href="{{route('listings.index')}}">
+                <div
+                    class="flex flex-col md:flex-row p-2 justify-between items-center md:items-stretch">
+                    <a class="block p-2 text-blue-700"
+                       href="{{route('listings.index')}}">
                         <i class="fa fa-arrow-alt-circle-left"></i>
                         Back To Listings
                     </a>
@@ -69,7 +62,8 @@
                             <strong>Salary:</strong> {{ $listing->salary }}
                         </li>
                         <li class="mb-2">
-                            <strong>Location:</strong> {{  $listing->city }}, {{ $listing->address }}
+                            <strong>Location:</strong> {{  $listing->city }}
+                            , {{ $listing->address }}
                         </li>
                         @if(!empty($listing->tags))
                             <li class="mb-2">
@@ -82,7 +76,8 @@
         </section>
 
         <section class="container mx-auto p-4">
-            <h2 class="text-xl font-semibold mb-4">Job Details</h2>
+            <h2 class="text-xl dark:text-white font-semibold mb-4">Job
+                Details</h2>
             <div class="rounded-lg shadow-md bg-white p-4">
                 <h3 class="text-lg font-semibold mb-2 text-blue-500">
                     Job Requirements

@@ -41,6 +41,11 @@
 
 <main class="bg-gray-100 dark:bg-gray-900 grow">
     <div class="mx-auto container mt-6 px-6 py-4 overflow-hidden ">
+        {{-- Management portal --}}
+        @canany(['manage-staff', 'manage-clients'])
+            @include('layouts.management')
+        @endcan
+
         {{ $slot }}
     </div>
 </main>

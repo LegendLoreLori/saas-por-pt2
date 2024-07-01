@@ -62,6 +62,7 @@ class PermissionsSeeder extends Seeder
             'user-edit',
             'user-add',
             'user-delete',
+            'manage-clients'
         ]);
 
         $admin = Role::create(['name' => 'admin']);

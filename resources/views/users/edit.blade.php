@@ -1,15 +1,5 @@
 <x-app-layout>
     <article class="container mx-auto max-w-7xl">
-        <header
-            class="py-4 bg-gray-600 text-gray-200 px-4 rounded-t-lg mb-4 flex flex-row justify-between items-center">
-            <div>
-                <h2 class="text-3xl font-semibold">Management Area</h2>
-                <h3 class="text-2xl">Edit User</h3>
-            </div>
-            <i class="fa fa-user-pen text-5xl"></i>
-        </header>
-
-
         @if(Session::has('success'))
             <section id="Messages" class="my-4 px-4">
                 <div
@@ -24,9 +14,6 @@
                 class="bg-red-200 text-red-800 mx-4 my-2 px-4 py-2 flex flex-col gap-1 rounded border-red-600">
                 <p>We have noted some data entry issues, please update and
                     resubmit.</p>
-                {{--                @foreach($errors->all() as $error)--}}
-                {{--                    <p class="text-sm">{{ $error }}</p>--}}
-                {{--                @endforeach--}}
             </section>
         @endif
 

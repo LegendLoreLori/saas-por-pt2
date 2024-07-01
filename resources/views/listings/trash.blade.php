@@ -1,14 +1,5 @@
 <x-app-layout>
     <article class="container mx-auto max-w-7xl">
-        <header
-            class="py-4 bg-gray-600 text-gray-200 px-4 rounded-t-lg mb-4 flex flex-row justify-between items-center">
-            <div>
-                <h2 class="text-3xl font-semibold">Management Area</h2>
-                <h3 class="text-2xl">Listings Recycle Bin</h3>
-            </div>
-            <i class="fa fa-user-slash text-5xl"></i>
-        </header>
-
         @if(Session::has('success'))
             <section id="Messages" class="my-4 px-4">
                 <div class="p-4 border-green-500 bg-green-100 text-green-700 rounded-lg">
@@ -23,11 +14,11 @@
                     {{ __('Deleted Listings') }}
                 </p>
                 <section class="flex flex-row justify-between gap-4">
-                    <a href="{{ route('listings.index') }}"
+                    <a href="{{ route('listings.manage') }}"
                        class="p-2 px-4 text-center rounded-md flex gap-4
                               text-gray-600 hover:text-gray-200 bg-gray-200 hover:bg-gray-500
                               duration-300 ease-in-out transition-all items-center">
-                        <i class="fa fa-users text-lg"></i>
+                        <i class="fa fa-newspaper text-lg"></i>
                         {{ __('Listings') }}
                     </a>
                     <form class="flex flex-row gap-2 items-center justify-end"

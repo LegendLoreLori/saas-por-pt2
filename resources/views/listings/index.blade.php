@@ -1,11 +1,14 @@
 <x-app-layout>
     <article class="container mx-auto max-w-7xl">
-        <header
-            class="py-4 bg-gray-600 text-gray-200 px-4 rounded-t-lg mb-4 flex flex-row justify-between items-center">
-            <div>
-                <h2 class="text-3xl font-semibold">Listings</h2>
-            </div>
-        </header>
+        @canany(['manage-staff', 'manage-clients'])
+        @else
+            <header
+                class="py-4 bg-gray-600 text-gray-200 px-4 rounded-t-lg mb-4 flex flex-row justify-between items-center">
+                <div>
+                    <h2 class="text-3xl font-semibold">Listings</h2>
+                </div>
+            </header>
+        @endcanany
 
         @if(Session::has('success'))
             <section id="Messages" class="my-4 px-4">
@@ -16,23 +19,11 @@
             </section>
         @endif
         <section>
-            <header class="flex flex-row justify-between items-center gap-2">
-                <p class="font-semibold text-lg text-gray-800 dark:text-gray-200 leading-tight">
-                    {{ __('Management') }}
-                </p>
-                <section class="flex flex-row justify-between gap-4">
-                    <a href="{{ route('listings.trash') }}"
-                       class="p-2 px-4 text-center rounded-md h-10
-                              text-slate-600 hover:text-slate-200 bg-slate-200 hover:bg-slate-500
-                              duration-300 ease-in-out transition-all space-x-2">
-                        <i class="fa fa-trash font-xl"></i>
-                    </a>
-                </section>
-            </header>
             <div class="container mx-auto p-4 mt-4">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                     @foreach($listings as $listing)
-                        <div class="rounded-lg shadow-md bg-white max-h-128 overflow-hidden">
+                        <div
+                            class="rounded-lg shadow-md bg-white max-h-128 overflow-hidden">
                             <div class="p-4 flex flex-col h-full">
                                 <h2 class="text-xl font-semibold">{{$listing->title}}</h2>
                                 <p class="text-gray-700 text-lg mt-2 overflow-hidden text-ellipsis md:h-48">
@@ -43,7 +34,8 @@
                                         <strong>Salary: </strong>{{$listing->salary}}
                                     </li>
                                     <li class="text-nowrap mb-2 overflow-hidden text-ellipsis">
-                                        <strong>Location: </strong>{{ $listing->city }}, {{ $listing->address }}
+                                        <strong>Location: </strong>{{ $listing->city }}
+                                        , {{ $listing->address }}
                                     </li>
                                     @if(!empty($listing->tags))
                                         <li class="mb-2">
@@ -64,11 +56,11 @@
             </div>
 
             <div>
-            <div class="border border-gray-200
+                <div class="border border-gray-200
                            dark:border-gray-700 dark:text-gray-400">
-                <div class="py-2 px-2">{{
+                    <div class="py-2 px-2">{{
                     $listings->links() }}</div>
-            </div>
+                </div>
             </div>
 
         </section>

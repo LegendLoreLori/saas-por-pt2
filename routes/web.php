@@ -51,6 +51,9 @@ Is it even middleware? or just some funny auth? */
 
 // Listings
 Route::middleware(['auth'])->group(function() {
+    // manage listings
+    Route::get('listings/manage', [ListingController::class, 'manage'])
+        ->name('listings.manage');
     // Trashed listings
     Route::get('listings/trash', [ListingController::class, 'trash'])
         ->name('listings.trash');
