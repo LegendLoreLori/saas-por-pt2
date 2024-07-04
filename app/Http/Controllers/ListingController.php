@@ -150,9 +150,10 @@ class ListingController extends Controller
      */
     public function destroy(Listing $listing): RedirectResponse
     {
-        Gate::authorize('destroy', $listing);
+        Gate::authorize('delete', $listing);
 
         $listing->delete();
+        // TODO: redirect to management if staff/admin
         return redirect(route('listings.index'))
             ->withSuccess("Listing: $listing->title deleted.");
     }
@@ -188,7 +189,7 @@ class ListingController extends Controller
     public function remove(string $id): RedirectResponse
     {
         $listing = Listing::onlyTrashed()->find($id);
-        Gate::authorize('remove', $listing);
+        Gate::authorize('remove', Listing::class);
 
         $oldListing = $listing;
         $listing->forceDelete();
@@ -202,7 +203,7 @@ class ListingController extends Controller
      */
     public function recoverAll(): RedirectResponse
     {
-        Gate::authorize('manage', Listing::class);
+        Gate::authorize('recoverAll', Listing::class);
 
         $listings = Listing::onlyTrashed()->get();
         $trashCount = $listings->count();
@@ -219,7 +220,7 @@ class ListingController extends Controller
      */
     public function empty(): RedirectResponse
     {
-        Gate::authorize('manage', Listing::class);
+        Gate::authorize('empty', Listing::class);
 
         $listings = Listing::onlyTrashed()->get();
         $trashCount = $listings->count();

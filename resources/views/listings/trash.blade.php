@@ -21,6 +21,7 @@
                         <i class="fa fa-newspaper text-lg"></i>
                         {{ __('Listings') }}
                     </a>
+                    @can('listing-trash-recover-all')
                     <form class="flex flex-row gap-2 items-center justify-end"
                           action="{{ route('listings.trash-recover') }}"
                           method="post">
@@ -35,6 +36,8 @@
                             {{ __('Restore All') }}
                         </button>
                     </form>
+                    @endcan
+                    @can('listing-trash-empty')
                     <form class="flex flex-row gap-2 items-center justify-end"
                           action="{{ route('listings.trash-empty') }}"
                           method="post">
@@ -50,6 +53,7 @@
                             Empty Trash
                         </button>
                     </form>
+                    @endcan
                 </section>
             </header>
 

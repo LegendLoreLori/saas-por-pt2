@@ -63,6 +63,8 @@ class PermissionsSeeder extends Seeder
             'user-edit',
             'user-add',
             'user-delete',
+            'listing-trash-recover',
+            'listing-trash-remove',
             'manage-clients',
             'manage-listings'
         ]);

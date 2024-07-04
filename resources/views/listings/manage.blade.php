@@ -51,8 +51,8 @@
                         <td class="py-2 pr-2 text-right">
                             <form
                                 class="flex flex-row gap-2 items-center justify-end"
-                                action="{{ route('listings.delete', $listing) }}"
-                                method="GET">
+                                action="{{ route('listings.destroy', $listing) }}"
+                                method="POST">
                                 @csrf
                                 @method("DELETE")
 

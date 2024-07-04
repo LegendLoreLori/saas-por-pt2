@@ -52,7 +52,7 @@ class ListingPolicy
             return Response::allow();
         }
 
-        if ($user->can('listing-edit')){
+        if ($user->can('listing-edit')) {
             return $user->id === $listing->user_id
                 ? Response::allow()
                 : Response::denyAsNotFound();
@@ -82,12 +82,8 @@ class ListingPolicy
      */
     public function restore(User $user, Listing $listing): bool
     {
-        if ($user->can('manage-listings')) {
-            return true;
-        }
-
-        if ($user->can('listing-delete')) {
-            return $user->id === $listing->user_id;
+        if ($user->can('listing-trash-recover')) {
+            return $user->can('manage-listings') || $user->id === $listing->user_id;
         }
 
         return false;
@@ -96,16 +92,18 @@ class ListingPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function remove(User $user, Listing $listing): bool
+    public function remove(User $user): bool
     {
-        if ($user->can('manage-listings')) {
-            return true;
-        }
+        return $user->can('listing-trash-remove');
+    }
 
-        if ($user->can('listing-delete')) {
-            return $user->id === $listing->user_id;
-        }
+    public function recoverAll(User $user): bool
+    {
+        return $user->can('listing-trash-recover-all');
+    }
 
-        return false;
+    public function empty(User $user): bool
+    {
+        return $user->can('listing-trash-empty');
     }
 }

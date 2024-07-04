@@ -65,8 +65,8 @@
                         <td class="py-2 pr-2 text-right">
                             <form
                                 class="flex flex-row gap-2 items-center justify-end"
-                                action="{{ route('users.delete', $user) }}"
-                                method="GET">
+                                action="{{ route('users.destroy', $user) }}"
+                                method="POST">
                                 @csrf
                                 @method("DELETE")
 

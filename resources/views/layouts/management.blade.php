@@ -7,7 +7,7 @@
             {{-- I don't know what class "group" is and I actually just hate tailwind, so these are good enough --}}
             @can('manage-listings')
             <x-nav-link :href="route('listings.manage')" :active="request()->routeIs
-                ('listings.manage')" class="group">
+                ('listings.*')" class="group">
                 {{ __('Listings') }}
             </x-nav-link>
             @endcan
