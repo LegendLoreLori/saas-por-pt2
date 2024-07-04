@@ -55,6 +55,7 @@ class UserPolicy
         //
     }
 
+
     /**
      * Determine whether the user can permanently delete the model.
      */

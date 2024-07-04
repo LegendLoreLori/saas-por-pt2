@@ -82,13 +82,21 @@ class ListingPolicy
      */
     public function restore(User $user, Listing $listing): bool
     {
-        //
+        if ($user->can('manage-listings')) {
+            return true;
+        }
+
+        if ($user->can('listing-delete')) {
+            return $user->id === $listing->user_id;
+        }
+
+        return false;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function destroy(User $user, Listing $listing): bool
+    public function remove(User $user, Listing $listing): bool
     {
         if ($user->can('manage-listings')) {
             return true;
