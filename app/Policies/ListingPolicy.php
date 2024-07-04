@@ -48,7 +48,17 @@ class ListingPolicy
      */
     public function update(User $user, Listing $listing): Response
     {
-        //
+        if ($user->can('manage-listings')) {
+            return Response::allow();
+        }
+
+        if ($user->can('listing-edit')){
+            return $user->id === $listing->user_id
+                ? Response::allow()
+                : Response::denyAsNotFound();
+        }
+
+        return Response::denyAsNotFound();
     }
 
     /**
@@ -56,7 +66,15 @@ class ListingPolicy
      */
     public function delete(User $user, Listing $listing): bool
     {
-        //
+        if ($user->can('manage-listings')) {
+            return true;
+        }
+
+        if ($user->can('listing-delete')) {
+            return $user->id === $listing->user_id;
+        }
+
+        return false;
     }
 
     /**

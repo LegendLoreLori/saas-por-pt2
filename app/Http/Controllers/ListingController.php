@@ -35,6 +35,8 @@ class ListingController extends Controller
      */
     public function create(): View
     {
+        Gate::authorize('create', Listing::class);
+
         return (view('listings.create'));
     }
 
@@ -95,6 +97,8 @@ class ListingController extends Controller
      */
     public function edit(Listing $listing): View
     {
+        Gate::authorize('update', $listing);
+
         return view('listings.edit', compact(['listing']));
     }
 
@@ -103,6 +107,10 @@ class ListingController extends Controller
      */
     public function update(UpdateListingRequest $request, Listing $listing)
     {
+        if ($request->user()->cannot('update', $listing)) {
+            abort(403);
+        }
+
         // Validate
         $rules = [
             'title' => 'required|string|max:255',
@@ -130,6 +138,8 @@ class ListingController extends Controller
      */
     public function delete(Listing $listing): View
     {
+        Gate::authorize('delete', $listing);
+
         return view('listings.delete', compact(['listing']));
     }
 

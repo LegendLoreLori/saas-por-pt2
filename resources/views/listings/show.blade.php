@@ -24,7 +24,7 @@
                     </a>
                     <div class="flex space-x-4">
                         <!-- Edit and Delete Form -->
-                        @if(true /* TODO: reimplement authorisation*/)
+                        @canany(['update', 'delete'], $listing)
                             <form
                                 class="flex flex-col md:flex-row gap-2 pr-2"
                                 action="{{ route('listings.delete', $listing) }}"
@@ -48,7 +48,7 @@
                                 </button>
 
                             </form>
-                        @endif
+                        @endcanany
                         <!-- End Delete Form -->
                     </div>
                 </div>
