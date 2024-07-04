@@ -16,13 +16,15 @@ class ListingController extends Controller
      */
     public function index(): View
     {
+        Gate::authorize('index', Listing::class);
+
         $listings = Listing::query()->orderByDesc('created_at')->paginate(6);
         return view('listings.index', compact(['listings']));
     }
 
     public function manage(): View
     {
-        Gate::authorize('index', Listing::class);
+        Gate::authorize('manage', Listing::class);
 
         $listings = Listing::paginate(10);
         return view('listings.manage', compact(['listings']));

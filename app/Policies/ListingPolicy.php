@@ -32,7 +32,15 @@ class ListingPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->can('listing-add');
+    }
+
+    /**
+     * Determine whether the user can view management page for models.
+     */
+    public function manage(User $user): bool
+    {
+        return $user->can('manage-listings');
     }
 
     /**

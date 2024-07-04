@@ -41,6 +41,7 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'listing-trash-empty']);
 
         // Create role management permission
+        Permission::create(['name' => 'manage-listings']);
         Permission::create(['name' => 'manage-staff']);
         Permission::create(['name' => 'manage-clients']);
 
@@ -62,7 +63,8 @@ class PermissionsSeeder extends Seeder
             'user-edit',
             'user-add',
             'user-delete',
-            'manage-clients'
+            'manage-clients',
+            'manage-listings'
         ]);
 
         $admin = Role::create(['name' => 'admin']);
