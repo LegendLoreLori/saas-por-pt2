@@ -45,6 +45,8 @@ class ListingController extends Controller
      */
     public function store(StoreListingRequest $request)
     {
+        Gate::authorize('create', Listing::class);
+
         $request['user_id'] = auth()->user()->getAuthIdentifier();
         // Validate
         $rules = [
@@ -148,6 +150,8 @@ class ListingController extends Controller
      */
     public function destroy(Listing $listing): RedirectResponse
     {
+        Gate::authorize('destroy', $listing);
+
         $listing->delete();
         return redirect(route('listings.index'))
             ->withSuccess("Listing: $listing->title deleted.");
@@ -158,6 +162,8 @@ class ListingController extends Controller
      */
     public function trash(): View
     {
+        Gate::authorize('manage', Listing::class);
+
         $listings = Listing::onlyTrashed()->orderBy('deleted_at')->paginate(5);
         return view('listings.trash', compact(['listings']));
     }

@@ -18,8 +18,7 @@
                 <div class="flex flex-col md:flex-row p-2 justify-between items-center md:items-stretch bg-red-200 rounded">
                         <p class="block p-2 text-red-600">Are you sure you want to delete this listing?</p>
                     <div class="flex space-x-4">
-                        {{--                        TODO: add authorisation--}}
-                        {{--                        <?php if (Framework\Authorisation::isOwner($listing->user_id)): ?>--}}
+                        @canany(['manage-listings', 'listing-delete'], $listing)
                         <!-- Delete Form -->
                         <form method="POST"
                               action="{{ route('listings.destroy', $listing) }}"
@@ -44,7 +43,7 @@
                             </a>
                         </form>
                         <!-- End Delete Form -->
-                        {{--                        <?php endif; ?>--}}
+                        @endcanany
                     </div>
                 </div>
                 <div class="p-4">
