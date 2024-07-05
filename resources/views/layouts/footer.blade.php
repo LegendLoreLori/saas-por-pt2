@@ -29,10 +29,6 @@
         </section>
 
         <section id="footerNav" class="flex flex-col sm:flex-row gap-1 -ml-1">
-            <x-nav-link :href="route('dashboard')"
-                        class="border-none text-gray-500 hover:text-gray-300 -my-1">
-                {{ __('Welcome') }}
-            </x-nav-link>
             <x-nav-link :href="route('welcome')"
                         class="border-none text-gray-500 hover:text-gray-300 -my-1">
                 {{ __('Dashboard') }}

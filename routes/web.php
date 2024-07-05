@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ListingController;
 use Illuminate\Support\Facades\Route;
 
+// I actually have no idea how this routing works for logged in versus router
+// and it's proving really difficult to fix, oh well !
 Route::get('/', [StaticPages::class, 'welcome'])->name('home');
 Route::get('welcome', [StaticPages::class, 'welcome'])->name('welcome');
 Route::get('about', [StaticPages::class, 'about'])->name('about');

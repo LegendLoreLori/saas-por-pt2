@@ -1,5 +1,7 @@
-<x-guest-layout>
+<x-app-layout>
 
+    @canany(['manage-listings, manage-staff', 'manage-clients'])
+    @else
     <x-slot name="topBanner">
         <section class="bg-blue-900 text-white py-6 text-center">
             <div class="container mx-auto">
@@ -34,6 +36,7 @@
             </div>
         </section>
     </x-slot>
+    @endcanany
 
     <!-- Main Content -->
     <section>
@@ -83,4 +86,4 @@
     </section>
 
 
-</x-guest-layout>
+</x-app-layout>

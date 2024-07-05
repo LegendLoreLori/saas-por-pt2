@@ -21,7 +21,7 @@ class StaticPages extends Controller
      */
     public function welcome(): View
     {
-        $listings = Listing::query()->orderByDesc('created_at')->limit(3)->get();
+        $listings = Listing::query()->orderByDesc('created_at')->limit(6)->get();
         return view('pages.welcome', compact(['listings']));
     }
 
