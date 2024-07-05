@@ -48,6 +48,8 @@ class PermissionsSeeder extends Seeder
         // Create roles
         $client = Role::create(['name' => 'client']);
         $client->givePermissionTo([
+            'user-edit',
+            'user-delete',
             'listing-browse',
             'listing-show',
             'listing-edit',
@@ -60,9 +62,7 @@ class PermissionsSeeder extends Seeder
         $staff->givePermissionTo([
             'user-browse',
             'user-show',
-            'user-edit',
             'user-add',
-            'user-delete',
             'listing-trash-recover',
             'listing-trash-remove',
             'manage-clients',

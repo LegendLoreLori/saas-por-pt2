@@ -65,6 +65,8 @@ class UserController extends Controller
      */
     public function show(User $user): View
     {
+        Gate::authorize('view', $user);
+
         return view('users.show', compact(['user']));
     }
 
@@ -73,6 +75,8 @@ class UserController extends Controller
      */
     public function edit(User $user): View
     {
+        Gate::authorize('edit', $user);
+
         return view('users.edit', compact(['user']));
     }
 
@@ -81,6 +85,8 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
+        Gate::authorize('update', $user);
+
         if (empty($request['password'])) {
             unset($request['password']);
             unset($request['password_confirmation']);

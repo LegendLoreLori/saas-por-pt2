@@ -20,7 +20,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        //
+        return $user->can('user-show');
     }
 
     /**
@@ -31,12 +31,30 @@ class UserPolicy
         //
     }
 
+    /*
+     * Determine whether the user can view the edit page for the model.
+     */
+    public function edit(User $user, User $model): bool
+    {
+        if ($user->can(['manage-staff', 'user-edit'])) return true;
+        if ($user->can(['manage-clients', 'user-edit'])) {
+            return !$model->hasRole('admin');
+        }
+        return false;
+    }
+
     /**
      * Determine whether the user can update the model.
      */
     public function update(User $user, User $model): bool
     {
-        //
+        if ($user->can('user-edit')) {
+            if ($user->can('manage-staff')) return true;
+            if ($user->can('manage-clients')
+                && !$model->hasRole('admin')) return true;
+            return $user->id === $model->id;
+        }
+        return false;
     }
 
     /**
