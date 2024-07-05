@@ -6,6 +6,10 @@ use App\Models\Listing;
 use App\Http\Requests\StoreListingRequest;
 use App\Http\Requests\UpdateListingRequest;
 use Illuminate\Http\RedirectResponse;
+// remove
+use Illuminate\Support\Facades\Route;
+// keep
+
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
@@ -153,7 +157,11 @@ class ListingController extends Controller
         Gate::authorize('delete', $listing);
 
         $listing->delete();
-        // TODO: redirect to management if staff/admin
+
+        if(url()->previous() === route('listings.manage')) {
+            return redirect(route('listings.manage'))
+                ->withSuccess("Listing: $listing->title deleted.");
+        }
         return redirect(route('listings.index'))
             ->withSuccess("Listing: $listing->title deleted.");
     }

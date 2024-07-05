@@ -42,8 +42,6 @@ Route::middleware(['auth'])->group(function() {
     // Delete user
     Route::get('users/{user}/delete', [UserController::class, 'delete'])->name('users.delete');
 
-    // Destroy user from management screen
-    Route::get('users/{user}/destroy', [UserController::class, 'delete'])->name('users.destroy');
 
 
     Route::resource('users', UserController::class);
@@ -74,10 +72,6 @@ Route::middleware(['auth'])->group(function() {
 
     // Delete listing
     Route::get('listings/{listing}/delete', [ListingController::class, 'delete'])->name('listings.delete');
-
-    // Destroy listing from management screen
-    Route::get('listings/{listing}/destroy', [ListingController::class, 'delete'])->name('listings.destroy');
-
 
     Route::resource('listings', ListingController::class);
 });
