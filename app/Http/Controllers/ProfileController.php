@@ -16,7 +16,6 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        // TODO: create ProfilePolicy
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
@@ -50,7 +49,6 @@ class ProfileController extends Controller
         $user = $request->user();
 
         Auth::logout();
-
         $user->delete();
 
         $request->session()->invalidate();

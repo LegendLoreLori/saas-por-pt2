@@ -3,7 +3,7 @@
         @canany(['manage-staff', 'manage-clients'])
         @else
             <header
-                class="py-4 bg-gray-600 text-gray-200 px-4 rounded-t-lg mb-4 flex flex-row justify-between items-center">
+                class="py-4 bg-gray-600 text-gray-200 px-4 rounded-lg mb-4 flex flex-row justify-between items-center">
                 <div>
                     <h2 class="text-3xl font-semibold">Listings</h2>
                 </div>
