@@ -84,13 +84,21 @@
                                     <i class="fa fa-pen text-lg"></i>
                                     <span class="sr-only">Edit</span>
                                 </a>
-                                <button type="submit"
-                                        class="p-1 w-10 text-center rounded-md
+                                @can('delete', $user)
+                                    <button type="submit"
+                                            class="p-1 w-10 text-center rounded-md
                                                text-red-600 hover:text-red-200 dark:hover:text-black bg-red-200 dark:bg-black hover:bg-red-500
                                                duration-300 ease-in-out transition-all">
-                                    <i class="fa fa-trash text-lg"></i>
-                                    <span class="sr-only">Delete</span>
-                                </button>
+                                        <i class="fa fa-trash text-lg"></i>
+                                        <span class="sr-only">Delete</span>
+                                    </button>
+                                @else
+                                    <div class="p-1 w-10 text-center rounded-md
+                                               text-gray-600 bg-gray-200 dark:bg-black">
+                                        <i class="fa fa-trash text-lg"></i>
+                                        <span class="sr-only">Delete</span>
+                                    </div>
+                                @endcan
                             </form>
                         </td>
                     </tr>

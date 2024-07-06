@@ -67,8 +67,8 @@ class UserPolicy
         if ($user->can('user-delete')) {
             if ($user->can('manage-staff')) return true;
             if ($user->can('manage-clients')
-                && !$model->hasRole('admin')) return true;
-            return $user->id === $model->id;
+                && !$model->hasRole('staff')) return true;
+            return $user->id === $model->id && !$model->hasRole('staff');
         }
         return false;
     }
