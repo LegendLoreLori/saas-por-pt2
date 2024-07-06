@@ -25,8 +25,6 @@
 
                 @csrf
                 @method('patch')
-
-
                 <fieldset class="grid grid-cols-7">
                     <label class="text-gray-500 col-span-2"
                            for="Name">Name:</label>

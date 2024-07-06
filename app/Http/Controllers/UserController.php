@@ -159,6 +159,8 @@ class UserController extends Controller
      */
     public function restore(string $id): RedirectResponse
     {
+        Gate::authorize('restore', User::class);
+
         $user = User::onlyTrashed()->find($id);
         $user->restore();
         return redirect()
@@ -173,6 +175,8 @@ class UserController extends Controller
     public function remove(string $id): RedirectResponse
     {
         $user = User::onlyTrashed()->find($id);
+        Gate::authorize('remove', $user);
+
         $oldUser = $user;
         $user->forceDelete();
         return redirect()
@@ -185,6 +189,8 @@ class UserController extends Controller
      */
     public function recoverAll(): RedirectResponse
     {
+        Gate::authorize('recoverAll', User::class);
+
         $users = User::onlyTrashed()->get();
         $trashCount = $users->count();
 
@@ -200,6 +206,8 @@ class UserController extends Controller
      */
     public function empty(): RedirectResponse
     {
+        Gate::authorize('empty', User::class);
+
         $users = User::onlyTrashed()->get();
         $trashCount = $users->count();
 
