@@ -78,6 +78,7 @@
                                     <i class="fa fa-eye text-lg"></i>
                                     <span class="sr-only hidden">View</span>
                                 </a>
+                                @can('edit', $user)
                                 <a href="{{ route('users.edit', $user) }}"
                                    class="p-1 w-10 text-center rounded-md
                                           text-purple-600 hover:text-purple-200 dark:hover:text-black bg-purple-200 dark:bg-black hover:bg-purple-500
@@ -85,6 +86,13 @@
                                     <i class="fa fa-pen text-lg"></i>
                                     <span class="sr-only">Edit</span>
                                 </a>
+                                @else
+                                    <div class="p-1 w-10 text-center rounded-md
+                                               text-gray-600 bg-gray-200 dark:bg-black">
+                                        <i class="fa fa-pen text-lg"></i>
+                                        <span class="sr-only">Edit</span>
+                                    </div>
+                                @endcan
                                 @can('delete', $user)
                                     <button type="submit"
                                             class="p-1 w-10 text-center rounded-md

@@ -39,8 +39,8 @@
 
             <div class="grid grid-cols-12">
                 <p class="col-span-12 md:col-span-2 xl:col-span-1 text-gray-500">
-                    Status</p>
-                <p class="col-span-12 md:col-span-10 xl:col-span-11 dark:text-white">{{ $user->status ?? "---" }}</p>
+                    Roles</p>
+                <p class="col-span-12 md:col-span-10 xl:col-span-11 dark:text-white">{{ ucfirst($user->roles->pluck('name')->implode(',')) }}</p>
             </div>
 
             <div class="grid grid-cols-12">

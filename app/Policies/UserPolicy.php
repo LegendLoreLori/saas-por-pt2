@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -26,9 +27,13 @@ class UserPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $user, StoreUserRequest $request): bool
     {
-        //
+        if ($user->can(['manage-staff', 'user-add'])) return true;
+        if ($user->can(['manage-clients', 'user-add'])) {
+            return $request->input('roles') === null;
+        }
+        return false;
     }
 
     /*

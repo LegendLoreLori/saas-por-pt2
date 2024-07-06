@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
+use function Pest\Laravel\call;
 
 class UserController extends Controller
 {
@@ -32,7 +34,9 @@ class UserController extends Controller
      */
     public function create(): View
     {
-        return view('users.create');
+        $roles = Role::all()->pluck('name');
+
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -45,8 +49,13 @@ class UserController extends Controller
             'name' => ['string', 'required', 'min:3', 'max:128'],
             'email' => ['required', 'email:rfc', 'unique:users'],
             'password' => ['required', 'confirmed', Password::min(4)->letters(),],
+            'roles' => ['sometimes', Rule::in(Role::all()->pluck('name'))]
         ];
         $validated = $request->validate($rules);
+
+        if ($request->user()->cannot('create', [User::class, $request])) {
+            abort(403);
+        }
 
         // Store
         $user = User::create([
@@ -56,8 +65,10 @@ class UserController extends Controller
             ]
         );
 
+        $user->syncRoles($validated['roles'] ?? 'client') ;
+
         return redirect(route('users.index'))
-            ->withSuccess("Added '{$user->name}'.");
+            ->withSuccess("Added '$user->name'.");
     }
 
     /**
@@ -77,7 +88,9 @@ class UserController extends Controller
     {
         Gate::authorize('edit', $user);
 
-        return view('users.edit', compact(['user']));
+        $roles = Role::all()->pluck('name');
+
+        return view('users.edit', compact(['user', 'roles']));
     }
 
     /**
@@ -108,15 +121,23 @@ class UserController extends Controller
             'password' => [
                 'sometimes',
                 'confirmed',
-                Password::min(4)->letters(), // ->uncompromised(),
+                Password::min(4)->letters(),
             ],
             'password_confirmation' => [
                 'required_unless:password,null',
             ],
+            'roles' => [
+                'sometimes',
+                Rule::in(Role::all()->pluck('name')),
+            ]
         ];
+
         $validated = $request->validate($rules);
+        $roles = $validated['roles'];
+        unset($validated['roles']);
 
         $user->update($validated);
+        $user->syncRoles($roles);
 
         return redirect(route('users.show', $user))
             ->withSuccess("Updated $user->name.");

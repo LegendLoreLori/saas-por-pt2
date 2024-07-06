@@ -76,7 +76,31 @@
                            placeholder="Confirm password"
                            class="border-gray-200 col-span-5">
                 </fieldset>
-
+                    @can('manage-staff')
+                    <fieldset class="grid grid-cols-7">
+                        <label class="text-gray-500 col-span-2"
+                               for="roles">Roles:</label>
+                        <div class="col-span-5 gap-1">
+                        @foreach($roles as $role)
+                            <input type="radio"
+                                   id="{{$role}}"
+                                   name="roles"
+                                   value="{{$role}}"
+                                   class="border-gray-200"
+                                   @checked($user->hasRole($role))
+                            >
+                            <label for="{{$role}}"
+                                   class="dark:text-white">
+                                {{$role}}
+                            </label>
+                        @endforeach
+                        </div>
+                        @error("roles")
+                        <span class="text-gray-500 col-span-2"></span>
+                        <p class="small text-red-500 col-span-5 text-sm">{{ $message }}</p>
+                        @enderror
+                    </fieldset>
+                    @endcan
                 <fieldset class="grid grid-cols-7">
                     <label class="text-gray-500 col-span-2"
                            for="">Actions</label>
