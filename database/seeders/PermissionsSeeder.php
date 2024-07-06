@@ -55,6 +55,7 @@ class PermissionsSeeder extends Seeder
             'listing-edit',
             'listing-add',
             'listing-delete',
+            'listing-trash-recover',
         ]);
 
         $staff = Role::create(['name' => 'staff']);
@@ -63,7 +64,6 @@ class PermissionsSeeder extends Seeder
             'user-browse',
             'user-show',
             'user-add',
-            'listing-trash-recover',
             'listing-trash-remove',
             'manage-clients',
             'manage-listings'

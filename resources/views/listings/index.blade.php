@@ -13,8 +13,17 @@
         @if(Session::has('success'))
             <section id="Messages" class="my-4 px-4">
                 <div
-                    class="p-4 border-green-500 bg-green-100 text-green-700 rounded-lg">
+                    class="p-4 border-green-500 bg-green-100 text-green-700 rounded-lg flex justify-between">
                     {{Session::get('success')}}
+                    @if(Session::get('deletedListing'))
+                        <a href="{{ route('listings.trash-restore', $deletedListing) }}"
+                           class="py-1 px-4 text-center rounded-md flex gap-4 items-center
+                                          text-blue-600 hover:text-blue-200 dark:hover:text-black bg-blue-200 dark:bg-black hover:bg-blue-500
+                                          duration-300 ease-in-out transition-all">
+                            <i class="fa fa-rotate-left"></i>
+                            <span>Undo</span>
+                        </a>
+                    @endif
                 </div>
             </section>
         @endif

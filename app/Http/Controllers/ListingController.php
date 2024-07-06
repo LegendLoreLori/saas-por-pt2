@@ -22,8 +22,9 @@ class ListingController extends Controller
     {
         Gate::authorize('index', Listing::class);
 
+        $deletedListing = session('deletedListing');
         $listings = Listing::query()->orderByDesc('created_at')->paginate(6);
-        return view('listings.index', compact(['listings']));
+        return view('listings.index', compact(['listings', 'deletedListing']));
     }
 
     public function manage(): View
@@ -163,7 +164,8 @@ class ListingController extends Controller
                 ->withSuccess("Listing: $listing->title deleted.");
         }
         return redirect(route('listings.index'))
-            ->withSuccess("Listing: $listing->title deleted.");
+            ->withSuccess("Listing: $listing->title deleted.")
+            ->with('deletedListing', $listing);
     }
 
     /**
