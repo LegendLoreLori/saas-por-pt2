@@ -22,13 +22,15 @@
                         <i class="fa fa-user-plus font-xl"></i>
                         {{ __('New User') }}
                     </a>
-
+                    @canany(['user-trash-recover', 'user-trash-remove',
+                             'user-trash-recover-all', 'user-trash-empty'])
                     <a href="{{ route('users.trash') }}"
                        class="p-2 px-4 text-center rounded-md h-10
                               text-slate-600 hover:text-slate-200 bg-slate-200 hover:bg-slate-500
                               duration-300 ease-in-out transition-all space-x-2">
                         <i class="fa fa-trash font-xl"></i>
                     </a>
+                    @endcanany
                 </section>
             </header>
 
@@ -69,7 +71,6 @@
                                 method="POST">
                                 @csrf
                                 @method("DELETE")
-
                                 <a href="{{ route('users.show', $user) }}"
                                    class="p-1 w-10 text-center rounded-md
                                           text-blue-600 hover:text-blue-200 dark:hover:text-black bg-blue-200 dark:bg-black hover:bg-blue-500

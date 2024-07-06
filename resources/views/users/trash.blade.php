@@ -2,7 +2,8 @@
     <article class="container mx-auto max-w-7xl">
         @if(Session::has('success'))
             <section id="Messages" class="my-4 px-4">
-                <div class="p-4 border-green-500 bg-green-100 text-green-700 rounded-lg">
+                <div
+                    class="p-4 border-green-500 bg-green-100 text-green-700 rounded-lg">
                     {{Session::get('success')}}
                 </div>
             </section>
@@ -21,35 +22,55 @@
                         <i class="fa fa-users text-lg"></i>
                         {{ __('Users') }}
                     </a>
-                    <form class="flex flex-row gap-2 items-center justify-end"
-                          action="{{ route('users.trash-recover') }}"
-                          method="post">
-                        @CSRF
-                        <button type="submit"
-                                class="p-2 px-4  text-center rounded-md
+                    @canany(['user-trash-recover-all', 'user-trash-empty'])
+                        <form
+                            class="flex flex-row gap-2 items-center justify-end"
+                            action="{{ route('users.trash-recover') }}"
+                            method="post">
+                            @CSRF
+                            @can('user-trash-recover-all')
+                                <button type="submit"
+                                        class="p-2 px-4  text-center rounded-md
                                    text-blue-200 hover:text-blue-600
                                    dark:hover:text-blue-900
                                    bg-blue-200 dark:bg-blue-900 hover:bg-blue-500
                                    duration-300 ease-in-out transition-all">
-                            <i class="fa fa-trash-arrow-up text-lg"></i>
-                            {{ __('Restore All') }}
-                        </button>
-                    </form>
-                    <form class="flex flex-row gap-2 items-center justify-end"
-                          action="{{ route('users.trash-empty') }}"
-                          method="post">
-                        @CSRF
-                        @method('delete')
-                        <button type="submit"
-                                class="p-2 px-4  text-center rounded-md
+                                    <i class="fa fa-trash-arrow-up text-lg"></i>
+                                    {{ __('Restore All') }}
+                                </button>
+                            @else
+                                <div class="p-2 px-4  text-center rounded-md
+                                     text-gray-600 bg-gray-200 dark:bg-gray-900">
+                                    <i class="fa fa-trash-arrow-up text-lg"></i>
+                                    {{ __('Restore All') }}
+                                </div>
+                            @endcan
+                        </form>
+                        <form
+                            class="flex flex-row gap-2 items-center justify-end"
+                            action="{{ route('users.trash-empty') }}"
+                            method="post">
+                            @CSRF
+                            @method('delete')
+                            @can('user-trash-empty')
+                                <button type="submit"
+                                        class="p-2 px-4  text-center rounded-md
                                    text-red-200 hover:text-red-600
                                    dark:hover:text-red-900
                                    bg-red-200 dark:bg-red-900 hover:bg-red-500
                                    duration-300 ease-in-out transition-all">
-                            <i class="fa fa-trash text-lg"></i>
-                            Empty Trash
-                        </button>
-                    </form>
+                                    <i class="fa fa-trash text-lg"></i>
+                                    {{ __('Empty Trash') }}
+                                </button>
+                            @else
+                                <div class="p-2 px-4  text-center rounded-md
+                                     text-gray-600 bg-gray-200 dark:bg-gray-900">
+                                    <i class="fa fa-trash-arrow-up text-lg"></i>
+                                    {{ __('Empty Trash') }}
+                                </div>
+                            @endcan
+                        </form>
+                    @endcan
                 </section>
             </header>
 
@@ -78,9 +99,10 @@
                         <td class="py-2 text-left">{{ $user->email }}</td>
                         <td class="py-2 text-left">{{ $user->deleted_at }}</td>
                         <td class="py-2 pr-2 text-right">
-                            <form class="flex flex-row gap-2 items-center justify-end"
-                                  action="{{ route('users.trash-remove', $user) }}"
-                                  method="POST">
+                            <form
+                                class="flex flex-row gap-2 items-center justify-end"
+                                action="{{ route('users.trash-remove', $user) }}"
+                                method="POST">
                                 @csrf
                                 @method('delete')
 
