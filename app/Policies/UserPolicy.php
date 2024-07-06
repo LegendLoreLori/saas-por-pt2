@@ -62,7 +62,15 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        //
+        if ($model->hasRole('admin')) return false;
+
+        if ($user->can('user-delete')) {
+            if ($user->can('manage-staff')) return true;
+            if ($user->can('manage-clients')
+                && !$model->hasRole('admin')) return true;
+            return $user->id === $model->id;
+        }
+        return false;
     }
 
     /**

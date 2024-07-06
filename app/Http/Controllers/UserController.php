@@ -128,6 +128,8 @@ class UserController extends Controller
      */
     public function delete(User $user): View
     {
+        Gate::authorize('delete', $user);
+
         return view('users.delete', compact(['user']));
     }
 
@@ -136,6 +138,8 @@ class UserController extends Controller
      */
     public function destroy(User $user): RedirectResponse
     {
+        Gate::authorize('delete', $user);
+
         $user->delete();
         return redirect(route('users.index'))
             ->withSuccess("User: $user->name deleted.");
