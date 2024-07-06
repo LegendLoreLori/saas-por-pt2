@@ -14,7 +14,6 @@
             <p>{{ $error }}</p>
         @endforeach
 
-
         <section
             class="flex flex-col gap-4 p-4">
             <div class="grid grid-cols-12">

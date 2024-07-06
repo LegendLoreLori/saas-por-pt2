@@ -91,6 +91,7 @@ class UserController extends Controller
             unset($request['password']);
             unset($request['password_confirmation']);
         }
+
         // Validate
         $rules = [
             'name' => [
@@ -110,10 +111,8 @@ class UserController extends Controller
                 Password::min(4)->letters(), // ->uncompromised(),
             ],
             'password_confirmation' => [
-                'required',
                 'required_unless:password,null',
             ],
-
         ];
         $validated = $request->validate($rules);
 

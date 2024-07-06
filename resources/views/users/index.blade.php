@@ -44,7 +44,7 @@
                     <th class="pl-2 flex-0 text-left">Name</th>
                     <th class="text-left">Email</th>
                     <th class="text-left">Role</th>
-                    <th class="text-left">Last Login</th>
+                    <th class="text-left">Last Update</th>
                     <th class="pr-2 text-right">Actions</th>
                 </tr>
                 </thead>
