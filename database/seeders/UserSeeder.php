@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 
 class UserSeeder extends Seeder
 {
@@ -19,12 +20,18 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@example.com',
             'password' => "Password1",
-        ]);
+        ])->assignRole('admin');
 
-// Additional Seed Users
-        // Check the UserFactory -
-        //   Fields are defined in the factory with default values
-        //   The password, if not given will default to `password`
+        // Create Staff user
+        User::factory()->create([
+            'name' => 'Staff',
+            'email' => 'staff@example.com',
+            'password' => "Password1"
+        ])->assignRole('staff');
+
+        // Additional Seed Users
+        // Fields are defined in the factory with default values
+        // The password, if not given will default to `password`
         $seedUsers = [
             [
                 'name' => 'Adrian Gould',
@@ -34,6 +41,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Ivanna Vinn',
                 'email' => 'ivanna.vinn@example.com',
+                'email_verified_at' => null,
             ],
             [
                 'name' => 'Russ Round',
@@ -74,7 +82,9 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($seedUsers as $seedUser) {
-            User::factory()->create($seedUser);
+            User::factory()
+                ->create($seedUser)
+                ->assignRole('client');
         }
     }
 }
